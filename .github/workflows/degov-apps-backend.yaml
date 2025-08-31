@@ -1,4 +1,4 @@
-name: build degov-indexer
+name: build degov-apps-backend
 
 on:
   push:
@@ -72,7 +72,7 @@ jobs:
           echo "DOCKER_IMAGE_VERSION=${DOCKER_IMAGE_VERSION}" >> $GITHUB_ENV
 
           # 生成镜像名称（严格格式校验）
-          IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/${REPO_NAME}-indexer:${DOCKER_IMAGE_VERSION}"
+          IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/${REPO_NAME}-backend:${DOCKER_IMAGE_VERSION}"
           echo "DOCKER_IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
           echo "Generated image: ${IMAGE_NAME}"  # 调试输出
       - name: Send start notification
@@ -119,7 +119,7 @@ jobs:
       - name: Update manifest
         working-directory: gitops-repo
         run: |
-          DEPLOY_FILE="appsmanifests/degov-indexer/overlays/env/prod/deployment-patch.yaml"
+          DEPLOY_FILE="appsmanifests/degov-apps-backend/overlays/env/prod/deployment-patch.yaml"
           
           # Verify file exists
           ls -l ./${DEPLOY_FILE}
